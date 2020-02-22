@@ -4,7 +4,7 @@ class Cipher
 
   def initialize(text, shift)
     alphabet = detect_lang(text).to_a.join
-    i = shift % alphabet.size
+    i = shift.to_i % alphabet.size
     @decrypt = alphabet
     @encrypt = alphabet[i..-1] + alphabet[0...i]
   end

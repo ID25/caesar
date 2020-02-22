@@ -1,0 +1,7 @@
+<%= form_for @cipher, url: { action: :decrypt }, html: { method: :get } do |f| %>
+  <%= @cipher.text %>
+  <%= f.number_field :shift, value: nil, placeholder: 'Enter key to decrypt' %>
+  <%= f.submit 'decrypt text' %>
+<%- end %>
+
+<%= link_to 'Back to all encrypted texts', cipher_index_path %>

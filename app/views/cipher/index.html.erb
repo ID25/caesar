@@ -1,1 +1,18 @@
-Hello
+<h1>Create your Caesar cipher</h1>
+<hr>
+<%= form_for @cipher_form, url: { action: :create } do |f| %>
+  <%= f.label :text %>
+  <%= f.text_area :text %>
+  <%= f.label :shift %>
+  <%= f.number_field :shift %>
+  <%= f.submit "Create" %>
+<% end %>
+
+
+<%- if @cipher_texts %>
+  <%- @cipher_texts.each do |cipher| %>
+    <p><%= cipher.text %></p>
+    <%= link_to 'Enter to decrypt text', cipher_path(cipher) %>
+  <%- end %>
+<%- end%>
+
