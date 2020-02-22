@@ -1,22 +1,22 @@
 class CipherController < ApplicationController
   def index
-    @cipher_texts = CipherText.latest
-    @cipher_form = CipherText.new
+    @cipher_texts = @current_user.cipher_texts.latest if @current_user
+    @cipher_form = @current_user.cipher_texts.build if @current_user
   end
 
   def create
     cipher_params.merge!(text: cryptor.encrypt(cipher_params[:text]))
-    @cipher_form = CipherText.create(cipher_params)
+    @cipher_form = @current_user.cipher_texts.create(cipher_params)
 
     redirect_to action: :index
   end
 
   def show
-    @cipher = CipherText.find(params[:id])
+    @cipher = @current_user.cipher_texts.find(params[:id])
   end
 
   def decrypt
-    @cipher = CipherText.find(params[:id])
+    @cipher = @current_user.cipher_texts.find(params[:id])
     @decrypt_text = Cipher.new(@cipher.text, cipher_params[:shift]).decrypt(@cipher.text)
   end
 
