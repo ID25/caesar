@@ -1,6 +1,6 @@
-class CipherController < ActionController::Base
+class CipherController < ApplicationController
   def index
-    @cipher_texts = CipherText.all
+    @cipher_texts = CipherText.latest
     @cipher_form = CipherText.new
   end
 
